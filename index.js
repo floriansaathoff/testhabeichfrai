@@ -1,6 +1,7 @@
 //create a Server
 const express = require("express");
 const app = express();
+const port = 3000;
 app.use(express.urlencoded({ extended: false }));
 
 //DB Connection
@@ -65,4 +66,4 @@ app.post("/checkdate", async (req, res) => {
     }
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || port, () => console.log("listening on port"));
