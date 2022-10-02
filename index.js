@@ -35,7 +35,8 @@ try {
 
 app.post("/checkdate", async (req, res) => {
     try {
-        const Bundesland = req.body.data;
+        const Bundesland = req.body.Bundesland;
+        const dev = req.body.dev;
         if(Bundesland) {
             const url = process.env.MONGOSTR;
 
@@ -47,8 +48,9 @@ app.post("/checkdate", async (req, res) => {
             var yyyy = today.getFullYear();
 
             let thisday = yyyy + mm + dd;
-            
             //thisday = "20221003"; //Uncomment to test for a Feiertag
+
+            if(dev) {thisday = parseInt(dev)}
 
             const bundesland = mongoose.model(Bundesland, bundeslandSchema);
 
