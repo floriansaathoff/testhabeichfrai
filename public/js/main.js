@@ -22,6 +22,7 @@ window.onload = (event) => {
 }
 
 const checkSession = () => {
+    console.log("check Session");
     if(sessionStorage.getItem("Bundesland") == null){
         Swal.fire({
             title: 'Huch, du hast scheinbar noch kein Bundesland hinterlegt',
@@ -39,10 +40,11 @@ const checkSession = () => {
             }}
         ).then(function (result) {
             sessionStorage.setItem("Bundesland", listOfItemsForSelectBox[result.value]);
+            checkdate(sessionStorage.getItem("Bundesland"));
         })
+    } else {
+        checkdate(sessionStorage.getItem("Bundesland"));
     }
-
-    checkdate(sessionStorage.getItem("Bundesland"));
 };
 
 const checkdate = (Bundesland) => {
@@ -72,6 +74,7 @@ function KeyPress(e) {
     var evtobj = window.event? event : e
     if (evtobj.keyCode == 81 && evtobj.ctrlKey){
         sessionStorage.clear();
+        $("h1").text("")
         console.log("cookies cleared");
         checkSession();
     }     

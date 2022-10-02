@@ -26,7 +26,7 @@ app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'))
 app.use(express.static(__dirname + '/public'));
 
 try {
-    mongoose.connect("mongodb+srv://admin:u3nZhx8yHFnn3Ivk@cluster0.ezibze2.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true });
+    mongoose.connect(process.env.MONGOSTR, { useNewUrlParser: true });
     console.info(`Listening on page`);
 } catch (e) {
     console.log("There was an error starting the app");
@@ -37,7 +37,7 @@ app.post("/checkdate", async (req, res) => {
     try {
         const Bundesland = req.body.data;
         if(Bundesland) {
-            const url = "mongodb+srv://admin:u3nZhx8yHFnn3Ivk@cluster0.ezibze2.mongodb.net/?retryWrites=true&w=majority";
+            const url = process.env.MONGOSTR;
 
             await mongoose.connect(url, { useNewUrlParser: true });
 
